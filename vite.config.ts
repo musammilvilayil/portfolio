@@ -10,14 +10,14 @@ export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
-    server: { entry: "server" },
-  },
-
-  // Allow Render-hosted preview URLs.
-  // This fixes errors like:
-  // "Blocked request. This host (...) is not allowed."
-  server: {
-    allowedHosts: ["portfolio-jjgc.onrender.com"],
+    server: {
+      entry: "server",
+      // Allow Render-hosted preview URLs.
+      // Fixes errors like:
+      // "Blocked request. This host (...) is not allowed."
+      allowedHosts: ["portfolio-jjgc.onrender.com"],
+    },
   },
 });
+
 
