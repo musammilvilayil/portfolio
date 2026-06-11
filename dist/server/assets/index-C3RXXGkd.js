@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "motion/react";
 import { ArrowRight, ArrowUpRight, Github, Linkedin, MessageCircle, MapPin, Mail, Code2, Rocket, Server, Cloud, ExternalLink, Sparkles, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useRouter, isRedirect } from "@tanstack/react-router";
-import { T as TSS_SERVER_FUNCTION, g as getServerFnById, a as createServerFn } from "./server-CUh8A8of.js";
+import { T as TSS_SERVER_FUNCTION, g as getServerFnById, c as createServerFn } from "./server-1nPcoA4t.js";
 import { z } from "zod";
 import "node:async_hooks";
 import "h3-v2";

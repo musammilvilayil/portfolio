@@ -2,7 +2,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-const appCss = "/assets/styles-BG62ol8I.css";
+const appCss = "/assets/styles-DHLuQZRe.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -135,7 +135,7 @@ const Route$1 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter = () => import("./index-CrsYB1lo.js");
+const $$splitComponentImporter = () => import("./index-C3RXXGkd.js");
 const SITE_TITLE = "Muhammad Musammil — Full-Stack Engineer";
 const SITE_DESC = "Full-Stack Engineer. 30+ production systems shipped. MERN, Next.js, FastAPI, Docker. Available for remote contracts with international founders and CTOs.";
 const Route = createFileRoute("/")({
