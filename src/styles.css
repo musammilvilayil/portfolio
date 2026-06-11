@@ -1,0 +1,180 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* =====================================================================
+ * Musammil Dev — Portfolio v2.0 "Ink & Voltage"
+ * ===================================================================*/
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Ink & Voltage tokens (Tailwind utility access) */
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-border-2: var(--border-2);
+  --color-voltage: var(--voltage);
+  --color-voltage-2: var(--voltage-2);
+  --color-voltage-muted: var(--voltage-muted);
+  --color-pulse: var(--pulse);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-success: var(--success);
+
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Ink & Voltage palette */
+  --ink: #08080F;
+  --ink-2: #0E0E1A;
+  --ink-3: #161624;
+  --border: #242436;
+  --border-2: #343450;
+  --voltage: #6366F1;
+  --voltage-2: #818CF8;
+  --voltage-muted: #1E1F3A;
+  --pulse: #22D3EE;
+  --text: #F1F1F8;
+  --text-2: #9898B8;
+  --text-3: #5C5C78;
+  --success: #10B981;
+
+  /* shadcn token aliases mapped to Ink & Voltage */
+  --background: var(--ink);
+  --foreground: var(--text);
+  --card: var(--ink-2);
+  --card-foreground: var(--text);
+  --popover: var(--ink-3);
+  --popover-foreground: var(--text);
+  --primary: var(--voltage);
+  --primary-foreground: #ffffff;
+  --secondary: var(--ink-3);
+  --secondary-foreground: var(--text);
+  --muted: var(--ink-3);
+  --muted-foreground: var(--text-2);
+  --accent: var(--voltage-muted);
+  --accent-foreground: var(--text);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --input: var(--border);
+  --ring: var(--voltage);
+}
+
+.dark {
+  /* same tokens — site is dark-first */
+  --background: var(--ink);
+  --foreground: var(--text);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--voltage);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px color-mix(in oklab, var(--voltage) 40%, transparent);
+  }
+
+  .voltage-glow {
+    box-shadow: 0 10px 40px -10px color-mix(in oklab, var(--voltage) 50%, transparent);
+  }
+
+  .terminal-grid {
+    background-image: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--voltage-2) 25%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 30%,
+      black 0%,
+      transparent 75%
+    );
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 30%,
+      black 0%,
+      transparent 75%
+    );
+  }
+
+  .divider-x > * + * {
+    border-left: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .divider-x > * + * {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  .pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+}
