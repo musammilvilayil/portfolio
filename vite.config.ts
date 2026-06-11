@@ -12,4 +12,12 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+
+  // Allow Render-hosted preview URLs.
+  // This fixes errors like:
+  // "Blocked request. This host (...) is not allowed."
+  server: {
+    allowedHosts: ["portfolio-jjgc.onrender.com"],
+  },
 });
+
