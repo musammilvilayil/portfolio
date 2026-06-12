@@ -1,9 +1,12 @@
 # TODO
 
-- [x] Inspect existing `vite.config.ts` and determine where `server.allowedHosts` can be injected without conflicting with `@lovable.dev/vite-tanstack-config`.
-- [x] Implement change in `vite.config.ts`: add `server.allowedHosts` including `portfolio-jjgc.onrender.com`.
-- [x] Verify config formatting/types compile (run `npm run build` or `npm run dev` as appropriate).
-- [x] Re-run the blocked request to confirm the host is now allowed.
-
-
+- [ ] Create Express server entry + app (server/app.ts, server/index.ts)
+- [ ] Implement SSR renderer (server/ssr.ts)
+- [ ] Implement API route: POST /api/contact (server/routes/contact.ts)
+- [ ] Implement route: GET /sitemap.xml (server/routes/sitemap.ts)
+- [ ] Add Supabase admin helper (server/supabase.ts)
+- [ ] Fix TypeScript/build issues (missing deps/types, SSR compilation)
+- [ ] Update package.json dependencies + scripts
+- [ ] Ensure dev workflow runs both Vite and Express
+- [ ] Verify endpoints work (dev + build)
 
