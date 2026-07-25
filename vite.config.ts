@@ -8,16 +8,15 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
+    // Redirect TanStack Start's bundled server entry to src/server.ts.
     server: {
       entry: "server",
-      // Allow Render-hosted preview URLs.
-      // Fixes errors like:
-      // "Blocked request. This host (...) is not allowed."
+    },
+  },
+  vite: {
+    server: {
+      // Allow requests forwarded through the Render production hostname.
       allowedHosts: ["portfolio-jjgc.onrender.com"],
     },
   },
 });
-
-
