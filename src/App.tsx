@@ -32,6 +32,7 @@ type Project = {
   featured?: boolean;
   repo?: string;
   live?: string;
+  liveLabel?: string;
   preview: string;
   updatedAt: string;
   icon: LucideIcon;
@@ -76,9 +77,10 @@ const projects: Project[] = [
     ],
     stack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Redis / BullMQ", "Python / FastAPI", "Docker", "GitHub Actions"],
     repo: "https://github.com/musammilvilayil/OpsPilot-AI-your-flagship",
-    live: "https://opspilot-web-ztwr.onrender.com/dashboard",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://opspilot-web-ztwr.onrender.com/dashboard",
-    updatedAt: "2026-07-26T12:27:18Z",
+    live: "https://opspilot-web-ztwr.onrender.com",
+    liveLabel: "Open OpsPilot",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://opspilot-web-ztwr.onrender.com",
+    updatedAt: "2026-07-26T12:40:43Z",
     icon: BrainCircuit,
     className: "project-visual opspilot",
   },
@@ -240,19 +242,19 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Products & projects</span><h2>Detailed product work</h2><p className="section-intro">Each product includes its purpose, major workflows, technical architecture and verified repository or live-demo access.</p></div>
         <div className="project-grid">
-          {projectsByRecentUpdate.map(({name,type,description,stack,highlights,status,featured,repo,live,preview,icon:Icon,className}) => (
+          {projectsByRecentUpdate.map(({name,type,description,stack,highlights,status,featured,repo,live,liveLabel,preview,icon:Icon,className}) => (
             <article className={`project-card${featured ? " featured-project" : ""}`} key={name}>
               <a className={className} href={live ?? repo} target="_blank" rel="noreferrer" aria-label={`Open ${name}`}>
                 <Icon className="project-fallback-icon" size={44}/>
                 <img src={preview} alt={`${name} project preview`} loading="lazy" decoding="async"/>
-                <span className="preview-label"><ExternalLink size={14}/> Open project</span>
+                <span className="preview-label"><ExternalLink size={14}/> {liveLabel ?? "Open project"}</span>
               </a>
               <div className="project-body">
                 <span className="project-status">{status}</span>
                 <small>{type}</small><h3>{name}</h3><p>{description}</p>
                 <ul className="project-highlights">{highlights.map(item => <li key={item}><CheckCircle2 size={14}/><span>{item}</span></li>)}</ul>
                 <div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div>
-                <div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div>
+                <div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> {liveLabel ?? "Live Demo"}</a> : null}</div>
               </div>
             </article>
           ))}
