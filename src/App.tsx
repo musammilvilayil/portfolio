@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
+  BrainCircuit,
   Camera,
   CheckCircle2,
   Cloud,
@@ -25,6 +26,9 @@ type Project = {
   type: string;
   description: string;
   stack: string[];
+  highlights?: string[];
+  status?: string;
+  featured?: boolean;
   repo?: string;
   live?: string;
   preview: string;
@@ -35,23 +39,46 @@ type Project = {
 
 const skills: Skill[] = [
   ["React.js", "Comfortable", 82],
-  ["Next.js", "Working knowledge", 70],
-  ["TypeScript", "Learning", 58],
+  ["Next.js", "Working knowledge", 72],
+  ["TypeScript", "Learning", 62],
   ["Node.js", "Comfortable", 80],
   ["Express.js", "Comfortable", 78],
   ["MongoDB", "Comfortable", 82],
-  ["PostgreSQL", "Working knowledge", 62],
+  ["PostgreSQL", "Working knowledge", 66],
+  ["Python / FastAPI", "Working knowledge", 64],
   ["Tailwind CSS", "Comfortable", 84],
 ];
 
 const experience: Experience[] = [
   ["2025", "Present", "Freelance Full-Stack Developer", "Independent Projects", "Built practical web products for students and clients using the MERN stack and modern development tools."],
+  ["2026", "", "Full-Stack AI & DevOps Developer", "OpsPilot AI", "Built an evidence-backed incident management platform for GitHub Actions with secure webhook ingestion, structured analysis, confidence scoring and approval-based resolution workflows."],
   ["2026", "", "Full-Stack Developer", "MEGHAM", "Cloud storage workspace with authentication, file uploads, folders, sharing and role-based dashboards."],
   ["2025", "", "Full-Stack Developer", "Projexify", "Project workflow platform focused on tasks, collaboration, progress tracking and useful management features."],
   ["2025", "", "Application Developer", "SHE-Shield", "Women’s safety solution built around emergency alerts, trusted contacts and connected-device concepts."],
 ];
 
 const projects: Project[] = [
+  {
+    name: "OpsPilot AI",
+    type: "AI-Powered DevOps Incident Management Platform",
+    status: "Flagship project · Production-oriented MVP",
+    featured: true,
+    description: "OpsPilot receives failed GitHub Actions workflow events, verifies and records each incident, analyses available evidence, and produces a structured root cause, confidence score and developer-approved resolution plan.",
+    highlights: [
+      "Verified GitHub workflow_run webhooks with HMAC SHA-256",
+      "Idempotent delivery processing and PostgreSQL incident history",
+      "Evidence-linked failure classification and confidence scoring",
+      "Redis and BullMQ background jobs with a safe synchronous fallback",
+      "Separate Python FastAPI service for structured incident analysis",
+      "Human approval required before any code-changing action",
+    ],
+    stack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Redis / BullMQ", "Python / FastAPI", "Docker", "GitHub Actions"],
+    repo: "https://github.com/musammilvilayil/OpsPilot-AI-your-flagship",
+    preview: "https://opengraph.githubassets.com/1/musammilvilayil/OpsPilot-AI-your-flagship",
+    updatedAt: "2026-07-26T09:28:00Z",
+    icon: BrainCircuit,
+    className: "project-visual opspilot",
+  },
   {
     name: "MEGHAM",
     type: "Cloud Storage Platform",
@@ -146,7 +173,7 @@ function App() {
         <div className="about-copy">
           <span className="section-label">About me</span>
           <h2>BCA Graduate<br/>Full-Stack <em>Developer</em></h2>
-          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web applications using React, Next.js, Node.js and MongoDB, with a focus on clear interfaces and practical backend workflows.</p>
+          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web applications using React, Next.js, Node.js and MongoDB, while exploring AI-assisted systems, Python services and practical DevOps workflows.</p>
           <div className="traits">{["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}</div>
           <div className="about-info">
             <div><MapPin size={17}/><span>Kollam, Kerala, India</span></div>
@@ -174,14 +201,20 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projectsByRecentUpdate.map(({name,type,description,stack,repo,live,preview,icon:Icon,className}) => (
-            <article className="project-card" key={name}>
+          {projectsByRecentUpdate.map(({name,type,description,stack,highlights,status,featured,repo,live,preview,icon:Icon,className}) => (
+            <article className={`project-card${featured ? " featured-project" : ""}`} key={name}>
               <a className={className} href={live ?? repo} target="_blank" rel="noreferrer" aria-label={`Open ${name}`}>
                 <Icon className="project-fallback-icon" size={44}/>
                 <img src={preview} alt={`${name} project preview`} loading="lazy" decoding="async"/>
-                <span className="preview-label"><ExternalLink size={14}/> Open preview</span>
+                <span className="preview-label"><ExternalLink size={14}/> Open project</span>
               </a>
-              <div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div>
+              <div className="project-body">
+                {status ? <span className="project-status">{status}</span> : null}
+                <small>{type}</small><h3>{name}</h3><p>{description}</p>
+                {highlights ? <ul className="project-highlights">{highlights.map(item => <li key={item}><CheckCircle2 size={14}/><span>{item}</span></li>)}</ul> : null}
+                <div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div>
+                <div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div>
+              </div>
             </article>
           ))}
         </div>
