@@ -63,7 +63,7 @@ const projects: Project[] = [
   {
     name: "OpsPilot AI",
     type: "AI-Powered DevOps Incident Management Platform",
-    status: "Flagship project · Production-oriented MVP",
+    status: "Live hosted dashboard · Production-oriented MVP",
     featured: true,
     description: "OpsPilot receives failed GitHub Actions workflow events, verifies and records each incident, analyses available evidence, and produces a structured root cause, confidence score and developer-approved resolution plan.",
     highlights: [
@@ -76,8 +76,9 @@ const projects: Project[] = [
     ],
     stack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Redis / BullMQ", "Python / FastAPI", "Docker", "GitHub Actions"],
     repo: "https://github.com/musammilvilayil/OpsPilot-AI-your-flagship",
-    preview: "https://opengraph.githubassets.com/1/musammilvilayil/OpsPilot-AI-your-flagship",
-    updatedAt: "2026-07-26T09:28:00Z",
+    live: "https://opspilot-web-ztwr.onrender.com/dashboard",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://opspilot-web-ztwr.onrender.com/dashboard",
+    updatedAt: "2026-07-26T12:27:18Z",
     icon: BrainCircuit,
     className: "project-visual opspilot",
   },
