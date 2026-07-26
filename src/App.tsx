@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
   Camera,
@@ -17,7 +18,20 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-const skills = [
+type Skill = readonly [name: string, label: string, level: number];
+type Experience = readonly [year: string, end: string, title: string, project: string, description: string];
+type Project = {
+  name: string;
+  type: string;
+  description: string;
+  stack: string[];
+  repo: string;
+  live?: string;
+  icon: LucideIcon;
+  className: string;
+};
+
+const skills: Skill[] = [
   ["React.js", "Comfortable", 82],
   ["Next.js", "Working knowledge", 70],
   ["TypeScript", "Learning", 58],
@@ -28,14 +42,14 @@ const skills = [
   ["Tailwind CSS", "Comfortable", 84],
 ];
 
-const experience = [
+const experience: Experience[] = [
   ["2025", "Present", "Freelance Full-Stack Developer", "Independent Projects", "Built practical web products for students and clients using the MERN stack and modern development tools."],
   ["2026", "", "Full-Stack Developer", "MEGHAM", "Cloud storage workspace with authentication, file uploads, folders, sharing and role-based dashboards."],
   ["2025", "", "Full-Stack Developer", "Projexify", "Project workflow platform focused on tasks, collaboration, progress tracking and useful management features."],
   ["2025", "", "Application Developer", "SHE-Shield", "Women’s safety solution built around emergency alerts, trusted contacts and connected-device concepts."],
 ];
 
-const projects = [
+const projects: Project[] = [
   {
     name: "MEGHAM",
     type: "Cloud Storage Platform",
@@ -88,7 +102,6 @@ function App() {
   return (
     <main>
       <Header />
-
       <section className="hero" id="home">
         <div className="hero-copy">
           <span className="kicker">Junior Full-Stack Developer</span>
@@ -109,9 +122,7 @@ function App() {
           <span className="section-label">About me</span>
           <h2>BCA Graduate<br/>Full-Stack <em>Developer</em></h2>
           <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web applications using React, Next.js, Node.js and MongoDB, with a focus on clear interfaces and practical backend workflows.</p>
-          <div className="traits">
-            {["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}
-          </div>
+          <div className="traits">{["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}</div>
           <div className="about-info">
             <div><MapPin size={17}/><span>Kollam, Kerala, India</span></div>
             <div><Mail size={17}/><span>musammilvilayil@gmail.com</span></div>
@@ -125,12 +136,12 @@ function App() {
       <section className="resume section" id="resume">
         <div className="section-heading"><span>Resume</span><h2>Skills, experience and education</h2></div>
         <div className="resume-grid">
-          <article className="panel skills-panel"><h3>Technical skills</h3>{skills.map(([name,label,level]) => <div className="skill-row" key={String(name)}><div><span>{name}</span><small>{label}</small></div><div className="bar"><i style={{width:`${level}%`}}/></div></div>)}</article>
-          <article className="panel timeline-panel"><h3>Experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={String(project)}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
+          <article className="panel skills-panel"><h3>Technical skills</h3>{skills.map(([name,label,level]) => <div className="skill-row" key={name}><div><span>{name}</span><small>{label}</small></div><div className="bar"><i style={{width:`${level}%`}}/></div></div>)}</article>
+          <article className="panel timeline-panel"><h3>Experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={project}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
           <div className="side-stack">
             <article className="panel"><h3>Education</h3><div className="education"><GraduationCap size={26}/><div><strong>Bachelor of Computer Applications</strong><p>Sree Narayana College of Technology, Kollam</p><span>Completed April 2026</span></div></div></article>
             <article className="panel"><h3>What I can do</h3><ul>{["Web application development","REST API integration","UI development","Authentication workflows","Database integration","Deployment basics"].map(item=><li key={item}><CheckCircle2 size={15}/>{item}</li>)}</ul></article>
-            <article className="panel"><h3>Hobbies & interests</h3><div className="interests">{[[Code2,"Coding"],[BookOpen,"Reading"],[Camera,"Photography"],[Plane,"Travel"]].map(([Icon,label])=>{const I=Icon as typeof Code2; return <div key={String(label)}><I size={20}/><span>{label as string}</span></div>})}</div></article>
+            <article className="panel"><h3>Hobbies & interests</h3><div className="interests">{[[Code2,"Coding"],[BookOpen,"Reading"],[Camera,"Photography"],[Plane,"Travel"]].map(([Icon,label])=>{const I=Icon as LucideIcon; return <div key={String(label)}><I size={20}/><span>{String(label)}</span></div>})}</div></article>
           </div>
         </div>
       </section>
@@ -138,7 +149,7 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(s=><span key={s}>{s}</span>)}</div><div className="project-links"><a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a>{live && <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a>}</div></div></article>)}
+          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links"><a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a>{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div></article>)}
         </div>
       </section>
 
