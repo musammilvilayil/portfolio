@@ -17,6 +17,7 @@ import {
   Plane,
   Send,
   ShieldCheck,
+  ShoppingBag,
 } from "lucide-react";
 
 type Skill = readonly [name: string, label: string, level: number];
@@ -26,8 +27,8 @@ type Project = {
   type: string;
   description: string;
   stack: string[];
-  highlights?: string[];
-  status?: string;
+  highlights: string[];
+  status: string;
   featured?: boolean;
   repo?: string;
   live?: string;
@@ -50,11 +51,12 @@ const skills: Skill[] = [
 ];
 
 const experience: Experience[] = [
-  ["2025", "Present", "Freelance Full-Stack Developer", "Independent Projects", "Built practical web products for students and clients using the MERN stack and modern development tools."],
+  ["2025", "Present", "Freelance Full-Stack Developer", "Independent Products", "Built practical web products for students and clients using modern JavaScript, databases, cloud services and deployment platforms."],
   ["2026", "", "Full-Stack AI & DevOps Developer", "OpsPilot AI", "Built an evidence-backed incident management platform for GitHub Actions with secure webhook ingestion, structured analysis, confidence scoring and approval-based resolution workflows."],
-  ["2026", "", "Full-Stack Developer", "MEGHAM", "Cloud storage workspace with authentication, file uploads, folders, sharing and role-based dashboards."],
-  ["2025", "", "Full-Stack Developer", "Projexify", "Project workflow platform focused on tasks, collaboration, progress tracking and useful management features."],
-  ["2025", "", "Application Developer", "SHE-Shield", "Women’s safety solution built around emergency alerts, trusted contacts and connected-device concepts."],
+  ["2026", "", "Full-Stack Developer", "MISMA", "Developed a deployable MERN commerce platform with secure authentication, persistent cart, server-validated checkout, order tracking and protected admin workflows."],
+  ["2026", "", "Product Interface Developer", "MEGHAM", "Designed a responsive cloud workspace with file browsing, upload feedback, activity history, administrative views, settings and accessible mobile navigation."],
+  ["2025", "", "Full-Stack Developer", "Projexify", "Built a learning-project management platform covering enrollment, mentor assignment, project assets, virtual labs and role-based administration."],
+  ["2025", "", "Android & IoT Developer", "SHE-Shield", "Created a safety ecosystem combining an Android application, BLE wearable, emergency communication, GPS tracking and evidence-capture workflows."],
 ];
 
 const projects: Project[] = [
@@ -80,10 +82,40 @@ const projects: Project[] = [
     className: "project-visual opspilot",
   },
   {
+    name: "MISMA",
+    type: "Baby Wear E-commerce Platform",
+    status: "Full-stack MERN product · Deployable storefront",
+    description: "A boutique baby-wear commerce product with customer accounts, product discovery, persistent shopping, secure server-validated checkout and a protected administration experience.",
+    highlights: [
+      "Customer authentication, product browsing and persistent cart",
+      "Server-validated checkout with database-based price recalculation",
+      "Order tracking with owner-or-admin access control",
+      "Protected inventory management and shop-setting workflows",
+      "Cloudinary uploads with file size and MIME-type restrictions",
+      "Helmet, CORS allow-listing, JSON limits and auth rate limiting",
+    ],
+    stack: ["React 19", "React Router", "Tailwind CSS", "Radix UI", "Framer Motion", "Node.js", "Express", "MongoDB", "JWT / bcrypt", "Cloudinary"],
+    repo: "https://github.com/musammilvilayil/MISMA",
+    live: "https://frontend-sandy-omega-90.vercel.app/",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://frontend-sandy-omega-90.vercel.app/",
+    updatedAt: "2026-07-26T08:07:00Z",
+    icon: ShoppingBag,
+    className: "project-visual misma",
+  },
+  {
     name: "MEGHAM",
-    type: "Cloud Storage Platform",
-    description: "Secure file uploads, metadata management, folders, sharing, search and role-based access.",
-    stack: ["React", "Node.js", "MongoDB", "Cloudinary"],
+    type: "Cloud Storage Product Workspace",
+    status: "Product interface MVP · Backend integration ready",
+    description: "A polished cloud-storage workspace designed around fast navigation, clear storage insights, realistic file-management journeys and administrative product experiences.",
+    highlights: [
+      "Spatial dashboard with storage insights, quick access and recent files",
+      "List and grid file browser with search, starred and shared filters",
+      "Upload workflow with progress and success feedback",
+      "Recent, shared, starred and trash management views",
+      "Activity audit trail plus admin member, health and moderation views",
+      "Profile, notification and persistent light/dark appearance settings",
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Vinext", "Node / Express ready", "MongoDB ready", "Cloudinary ready"],
     repo: "https://github.com/musammilvilayil/Megham",
     live: "https://megham-six.vercel.app",
     preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://megham-six.vercel.app",
@@ -93,9 +125,18 @@ const projects: Project[] = [
   },
   {
     name: "Projexify",
-    type: "Project Management Platform",
-    description: "A full-stack workflow product for tasks, teams, progress tracking and collaboration.",
-    stack: ["React", "Node.js", "Express", "MongoDB"],
+    type: "Learning Project Management Platform",
+    status: "Full-stack platform · Collaboration and virtual labs",
+    description: "A full-stack platform for managing learning projects, student enrollments, mentor relationships, project assets and collaborative virtual-lab workflows.",
+    highlights: [
+      "Project catalog with asset uploads and automatic ZIP extraction",
+      "Student enrollment, progress tracking and mentor assignment",
+      "Virtual-lab file manager with downloads and editing workflows",
+      "Real-time collaboration-focused project experience",
+      "Bearer-token API security for protected operations",
+      "Role-based administration and project-centre management",
+    ],
+    stack: ["React", "Node.js", "Express", "MongoDB", "Token Auth", "REST API", "Jest"],
     repo: "https://github.com/musammilvilayil/Projexify",
     live: "https://projexify.onrender.com",
     preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://projexify.onrender.com",
@@ -105,26 +146,23 @@ const projects: Project[] = [
   },
   {
     name: "SHE-Shield",
-    type: "Safety Technology",
-    description: "Emergency alerts, trusted contacts, location support and connected safety-device concepts.",
-    stack: ["JavaScript", "Node.js", "MongoDB", "ESP32"],
+    type: "Android and IoT Women’s Safety Ecosystem",
+    status: "Mobile + wearable prototype · Emergency-response system",
+    description: "A multi-trigger safety solution combining an Android application and an ESP32 BLE wearable to send emergency alerts, location information and supporting evidence during high-risk situations.",
+    highlights: [
+      "Manual, shake-detection and BLE-wearable SOS triggers",
+      "High-precision GPS, Google Maps link, multipart SMS and emergency call",
+      "Automatic background audio evidence with local timestamps",
+      "Firebase onboarding and management of up to four trusted contacts",
+      "ESP32 wearable with BLE, AES signals, GPS, GSM fallback and OLED UI",
+      "Evidence gallery, wearable monitor, safe map and configurable fake call",
+    ],
+    stack: ["Android / Java", "Firebase", "Google Maps SDK", "MediaRecorder", "BLE / AES", "ESP32", "MPU6050", "NEO-6M GPS", "SIM800L GSM", "OLED"],
     repo: "https://github.com/musammilvilayil/she-sheild",
     preview: "https://opengraph.githubassets.com/1/musammilvilayil/she-sheild",
     updatedAt: "2026-07-23T08:00:00Z",
     icon: ShieldCheck,
     className: "project-visual shield",
-  },
-  {
-    name: "MISMA",
-    type: "Baby Wear E-commerce",
-    description: "A full-stack MERN boutique storefront with customer authentication, product browsing, persistent cart, secure checkout, order tracking and admin inventory management.",
-    stack: ["React 19", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary"],
-    repo: "https://github.com/musammilvilayil/MISMA",
-    live: "https://frontend-sandy-omega-90.vercel.app/",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://frontend-sandy-omega-90.vercel.app/",
-    updatedAt: "2026-07-26T08:07:00Z",
-    icon: Code2,
-    className: "project-visual misma",
   },
 ];
 
@@ -158,10 +196,10 @@ function App() {
         <div className="hero-copy">
           <span className="kicker">Junior Full-Stack Developer</span>
           <h1><span>Muhammad</span>Musammil</h1>
-          <p>BCA graduate building reliable, user-focused web applications and practical full-stack products.</p>
+          <p>BCA graduate building reliable web products across full-stack development, AI-assisted systems, cloud workflows and connected safety technology.</p>
           <div className="hero-actions">
             <a className="btn primary" href="#resume"><Download size={17}/> View Resume</a>
-            <a className="btn" href="#portfolio">View Projects <ExternalLink size={16}/></a>
+            <a className="btn" href="#portfolio">View Products <ExternalLink size={16}/></a>
           </div>
           <div className="socials">
             {socials.map(([Icon, href, label]) => <a key={label} href={href} aria-label={label} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"><Icon size={19}/></a>)}
@@ -173,7 +211,7 @@ function App() {
         <div className="about-copy">
           <span className="section-label">About me</span>
           <h2>BCA Graduate<br/>Full-Stack <em>Developer</em></h2>
-          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web applications using React, Next.js, Node.js and MongoDB, while exploring AI-assisted systems, Python services and practical DevOps workflows.</p>
+          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web products using React, Next.js, Node.js and databases, while developing practical experience with AI services, secure APIs, background jobs, deployments and IoT-connected applications.</p>
           <div className="traits">{["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}</div>
           <div className="about-info">
             <div><MapPin size={17}/><span>Kollam, Kerala, India</span></div>
@@ -189,17 +227,17 @@ function App() {
         <div className="section-heading"><span>Resume</span><h2>Skills, experience and education</h2></div>
         <div className="resume-grid">
           <article className="panel skills-panel"><h3>Technical skills</h3>{skills.map(([name,label,level]) => <div className="skill-row" key={name}><div><span>{name}</span><small>{label}</small></div><div className="bar"><i style={{width:`${level}%`}}/></div></div>)}</article>
-          <article className="panel timeline-panel"><h3>Experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={project}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
+          <article className="panel timeline-panel"><h3>Product experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={project}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
           <div className="side-stack">
             <article className="panel"><h3>Education</h3><div className="education"><GraduationCap size={26}/><div><strong>Bachelor of Computer Applications</strong><p>Sree Narayana College of Technology, Kollam</p><span>Completed April 2026</span></div></div></article>
-            <article className="panel"><h3>What I can do</h3><ul>{["Web application development","REST API integration","UI development","Authentication workflows","Database integration","Deployment basics"].map(item=><li key={item}><CheckCircle2 size={15}/>{item}</li>)}</ul></article>
+            <article className="panel"><h3>What I can do</h3><ul>{["Full-stack web product development","REST API and webhook integration","Authentication and role-based access","SQL and NoSQL database integration","AI service and background-job workflows","Cloud deployment and Docker basics","Responsive UI development","IoT-connected application concepts"].map(item=><li key={item}><CheckCircle2 size={15}/>{item}</li>)}</ul></article>
             <article className="panel"><h3>Hobbies & interests</h3><div className="interests">{[[Code2,"Coding"],[BookOpen,"Reading"],[Camera,"Photography"],[Plane,"Travel"]].map(([Icon,label])=>{const I=Icon as LucideIcon; return <div key={String(label)}><I size={20}/><span>{String(label)}</span></div>})}</div></article>
           </div>
         </div>
       </section>
 
       <section className="portfolio section" id="portfolio">
-        <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
+        <div className="section-heading"><span>Products & projects</span><h2>Detailed product work</h2><p className="section-intro">Each product includes its purpose, major workflows, technical architecture and verified repository or live-demo access.</p></div>
         <div className="project-grid">
           {projectsByRecentUpdate.map(({name,type,description,stack,highlights,status,featured,repo,live,preview,icon:Icon,className}) => (
             <article className={`project-card${featured ? " featured-project" : ""}`} key={name}>
@@ -209,9 +247,9 @@ function App() {
                 <span className="preview-label"><ExternalLink size={14}/> Open project</span>
               </a>
               <div className="project-body">
-                {status ? <span className="project-status">{status}</span> : null}
+                <span className="project-status">{status}</span>
                 <small>{type}</small><h3>{name}</h3><p>{description}</p>
-                {highlights ? <ul className="project-highlights">{highlights.map(item => <li key={item}><CheckCircle2 size={14}/><span>{item}</span></li>)}</ul> : null}
+                <ul className="project-highlights">{highlights.map(item => <li key={item}><CheckCircle2 size={14}/><span>{item}</span></li>)}</ul>
                 <div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div>
                 <div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div>
               </div>
