@@ -15,7 +15,7 @@ import { ProjectCard } from "./components/ProjectCard";
 import { SectionHeading } from "./components/SectionHeading";
 import { capabilities, projects, skillGroups, timeline } from "./data/portfolio";
 
-const profileImage = "https://avatars.githubusercontent.com/u/140297924?v=4";
+const profileImage = "/profile.webp";
 
 function App() {
   return (
@@ -112,7 +112,7 @@ function App() {
 
             <div className="portrait-panel">
               <div className="portrait-frame">
-                <img src={profileImage} alt="Muhammad Musammil" />
+                <img src={profileImage} alt="Muhammad Musammil" loading="eager" decoding="async" />
               </div>
               <div className="portrait-note">
                 <strong>Available for</strong>
