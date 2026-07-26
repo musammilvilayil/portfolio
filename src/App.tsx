@@ -1,386 +1,153 @@
-import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
   Camera,
+  CheckCircle2,
   Cloud,
   Code2,
+  Download,
   ExternalLink,
   Github,
   GraduationCap,
-  Instagram,
   Linkedin,
   Mail,
-  Maximize2,
+  MapPin,
   Phone,
   Plane,
+  Send,
   ShieldCheck,
 } from "lucide-react";
 
-type NavSection = "home" | "about" | "resume" | "portfolio";
-
-type Skill = {
-  name: string;
-  level: number;
-  badge?: string;
-};
-
-type TimelineItem = {
-  period: string;
-  title: string;
-  project: string;
-  description: string;
-};
-
-type Interest = {
-  label: string;
-  icon: LucideIcon;
-};
-
-const technicalSkills: Skill[] = [
-  { name: "React.js", level: 82, badge: "⚛" },
-  { name: "Next.js", level: 76, badge: "N" },
-  { name: "Node.js", level: 78, badge: "JS" },
-  { name: "MongoDB", level: 80, badge: "M" },
-  { name: "Tailwind CSS", level: 84, badge: "≈" },
-  { name: "TypeScript", level: 72, badge: "TS" },
+const skills = [
+  ["React.js", "Comfortable", 82],
+  ["Next.js", "Working knowledge", 70],
+  ["TypeScript", "Learning", 58],
+  ["Node.js", "Comfortable", 80],
+  ["Express.js", "Comfortable", 78],
+  ["MongoDB", "Comfortable", 82],
+  ["PostgreSQL", "Working knowledge", 62],
+  ["Tailwind CSS", "Comfortable", 84],
 ];
 
-const languages: Skill[] = [
-  { name: "Malayalam", level: 96 },
-  { name: "English", level: 68 },
-];
-
-const personalSkills: Skill[] = [
-  { name: "Creativity", level: 86 },
-  { name: "Team Work", level: 80 },
-  { name: "Communication", level: 72 },
-  { name: "Organization", level: 78 },
-];
-
-const experience: TimelineItem[] = [
-  {
-    period: "2025\nPresent",
-    title: "Freelance Full-Stack Developer",
-    project: "Independent Projects",
-    description:
-      "Built and refined practical web products for students and clients using modern JavaScript stacks.",
-  },
-  {
-    period: "2026",
-    title: "Full-Stack Developer",
-    project: "MEGHAM",
-    description:
-      "Cloud storage workspace with authentication, file uploads, sharing, folders and role-based dashboards.",
-  },
-  {
-    period: "2025",
-    title: "Full-Stack Developer",
-    project: "Projexify",
-    description:
-      "Project-management platform designed around tasks, teams, progress tracking and useful workflows.",
-  },
-  {
-    period: "2025",
-    title: "Application Developer",
-    project: "SHE-Shield",
-    description:
-      "Women’s safety solution combining emergency alerts, location support and connected-device concepts.",
-  },
-];
-
-const canDo = [
-  "Responsive web apps",
-  "REST API integration",
-  "Modern UI development",
-  "Authentication workflows",
-  "Database integration",
-  "Static and cloud deployment",
-];
-
-const developerSkills = [
-  "Problem solving",
-  "Clean interface design",
-  "Debugging and iteration",
-  "API integration",
-  "Responsive design",
-];
-
-const interests: Interest[] = [
-  { label: "Coding", icon: Code2 },
-  { label: "Reading", icon: BookOpen },
-  { label: "Photography", icon: Camera },
-  { label: "Travel", icon: Plane },
+const experience = [
+  ["2025", "Present", "Freelance Full-Stack Developer", "Independent Projects", "Built practical web products for students and clients using the MERN stack and modern development tools."],
+  ["2026", "", "Full-Stack Developer", "MEGHAM", "Cloud storage workspace with authentication, file uploads, folders, sharing and role-based dashboards."],
+  ["2025", "", "Full-Stack Developer", "Projexify", "Project workflow platform focused on tasks, collaboration, progress tracking and useful management features."],
+  ["2025", "", "Application Developer", "SHE-Shield", "Women’s safety solution built around emergency alerts, trusted contacts and connected-device concepts."],
 ];
 
 const projects = [
   {
     name: "MEGHAM",
     type: "Cloud Storage Platform",
-    description:
-      "A cloud workspace for secure file uploads, metadata management, folders, sharing, search and role-based access.",
-    stack: ["React", "Node.js", "Express", "MongoDB", "Cloudinary"],
-    repository: "https://github.com/musammilvilayil/Megham",
+    description: "Secure file uploads, metadata management, folders, sharing, search and role-based access.",
+    stack: ["React", "Node.js", "MongoDB", "Cloudinary"],
+    repo: "https://github.com/musammilvilayil/Megham",
     live: "https://megham-six.vercel.app",
     icon: Cloud,
+    className: "project-visual megham",
   },
   {
     name: "Projexify",
     type: "Project Management Platform",
-    description:
-      "A full-stack project workflow product focused on task coordination, collaboration and progress visibility.",
+    description: "A full-stack workflow product for tasks, teams, progress tracking and collaboration.",
     stack: ["React", "Node.js", "Express", "MongoDB"],
-    repository: "https://github.com/musammilvilayil/Projexify",
+    repo: "https://github.com/musammilvilayil/Projexify",
     icon: Code2,
+    className: "project-visual projexify",
   },
   {
     name: "SHE-Shield",
     type: "Safety Technology",
-    description:
-      "A women’s safety project designed around emergency alerts, trusted contacts, location sharing and connected hardware concepts.",
+    description: "Emergency alerts, trusted contacts, location support and connected safety-device concepts.",
     stack: ["JavaScript", "Node.js", "MongoDB", "ESP32"],
-    repository: "https://github.com/musammilvilayil/she-sheild",
+    repo: "https://github.com/musammilvilayil/she-sheild",
     icon: ShieldCheck,
+    className: "project-visual shield",
   },
 ];
 
-function SectionNav({ active }: { active: NavSection }) {
-  const links: Array<{ label: string; href: string; id: NavSection }> = [
-    { label: "Home", href: "#home", id: "home" },
-    { label: "About", href: "#about", id: "about" },
-    { label: "Resume", href: "#resume", id: "resume" },
-    { label: "Portfolio", href: "#portfolio", id: "portfolio" },
-  ];
+const socials = [
+  [Github, "https://github.com/musammilvilayil", "GitHub"],
+  [Linkedin, "https://www.linkedin.com/in/muhammad-musammil-a-646882280/", "LinkedIn"],
+  [Mail, "mailto:musammilvilayil@gmail.com", "Email"],
+] as const;
 
+function Header() {
   return (
-    <header className="panel-nav">
-      <nav aria-label={`${active} section navigation`}>
-        {links.map((link) => (
-          <a
-            className={active === link.id ? "is-active" : undefined}
-            href={link.href}
-            key={link.id}
-          >
-            {link.label}
-          </a>
-        ))}
+    <header className="topbar">
+      <a className="brand" href="#home">MM</a>
+      <nav>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a>
       </nav>
-      <a className="phone-link" href="tel:+916282135504">
-        <Phone aria-hidden="true" size={14} />
-        <span>+91 62821 35504</span>
-      </a>
+      <a className="phone-pill" href="tel:+916282135504"><Phone size={14}/> +91 62821 35504</a>
     </header>
   );
 }
 
-function ExpandMark() {
-  return (
-    <a className="expand-mark" href="#home" aria-label="Back to the top">
-      <Maximize2 aria-hidden="true" size={20} />
-    </a>
-  );
-}
-
-function SkillMeter({ skill }: { skill: Skill }) {
-  return (
-    <div className="skill-meter">
-      <div className="skill-name">
-        {skill.badge ? <span className="skill-badge">{skill.badge}</span> : null}
-        <span>{skill.name}</span>
-      </div>
-      <div className="meter-track" aria-label={`${skill.name} skill level`}>
-        <span className="meter-fill" style={{ width: `${skill.level}%` }} />
-        <span className="meter-dot" style={{ left: `calc(${skill.level}% - 5px)` }} />
-      </div>
-    </div>
-  );
-}
-
-function ColumnTitle({ children }: { children: string }) {
-  return <h3 className="column-title">{children}</h3>;
-}
-
 function App() {
   return (
-    <main className="portfolio-site">
-      <section className="screen-panel hero-panel" id="home">
-        <div className="panel-overlay" />
-        <SectionNav active="home" />
+    <main>
+      <Header />
 
+      <section className="hero" id="home">
         <div className="hero-copy">
-          <p className="hero-first-name">Muhammad</p>
-          <h1>Musammil</h1>
-          <p className="hero-role">Junior Full-Stack Developer</p>
-          <div className="hero-buttons">
-            <a href="#resume">Resume</a>
-            <a href="#portfolio">Portfolio</a>
+          <span className="kicker">Junior Full-Stack Developer</span>
+          <h1><span>Muhammad</span>Musammil</h1>
+          <p>BCA graduate building reliable, user-focused web applications and practical full-stack products.</p>
+          <div className="hero-actions">
+            <a className="btn primary" href="#resume"><Download size={17}/> View Resume</a>
+            <a className="btn" href="#portfolio">View Projects <ExternalLink size={16}/></a>
+          </div>
+          <div className="socials">
+            {socials.map(([Icon, href, label]) => <a key={label} href={href} aria-label={label} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"><Icon size={19}/></a>)}
           </div>
         </div>
-
-        <div className="hero-socials" aria-label="Social links">
-          <a href="https://github.com/musammilvilayil" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <Github size={22} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/muhammad-musammil-a-646882280/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={22} />
-          </a>
-          <a href="#contact" aria-label="Instagram profile placeholder">
-            <Instagram size={22} />
-          </a>
-          <a href="mailto:musammilvilayil@gmail.com" aria-label="Email">
-            <Mail size={22} />
-          </a>
-        </div>
-        <ExpandMark />
       </section>
 
-      <section className="screen-panel about-panel" id="about">
-        <SectionNav active="about" />
+      <section className="about section" id="about">
         <div className="about-copy">
-          <h2 className="section-title">About</h2>
-          <a className="about-email" href="mailto:musammilvilayil@gmail.com">
-            musammilvilayil@gmail.com
-          </a>
-          <p>
-            BCA graduate and Junior Full-Stack Developer from Kerala, India. I build modern web applications with React, Next.js, Node.js and MongoDB, with a focus on useful interfaces, practical backend workflows and clean implementation.
-          </p>
-          <p>
-            My portfolio work includes cloud storage, project-management and safety-focused products. I enjoy turning real-world ideas into reliable digital experiences while continuously improving my development fundamentals.
-          </p>
-          <div className="location-mark" aria-label="Location">
-            <span />
-            <p>Kollam, Kerala<br />India</p>
-            <span />
+          <span className="section-label">About me</span>
+          <h2>BCA Graduate<br/>Full-Stack <em>Developer</em></h2>
+          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web applications using React, Next.js, Node.js and MongoDB, with a focus on clear interfaces and practical backend workflows.</p>
+          <div className="traits">
+            {["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}
+          </div>
+          <div className="about-info">
+            <div><MapPin size={17}/><span>Kollam, Kerala, India</span></div>
+            <div><Mail size={17}/><span>musammilvilayil@gmail.com</span></div>
+            <div><GraduationCap size={17}/><span>BCA, completed April 2026</span></div>
+            <div><Phone size={17}/><span>Open to opportunities</span></div>
           </div>
         </div>
-
-        <div className="portrait-stage" aria-label="Portrait of Muhammad Musammil">
-          <div className="portrait-halo" />
-          <img src="/profile.webp" alt="Muhammad Musammil wearing a navy suit" loading="eager" decoding="async" />
-        </div>
-        <ExpandMark />
+        <div className="about-portrait"><div className="portrait-ring"/><img src="/profile.webp" alt="Muhammad Musammil wearing a navy suit" width="1200" height="1500" loading="lazy" decoding="async"/></div>
       </section>
 
-      <section className="screen-panel resume-panel" id="resume">
-        <div className="resume-texture" />
-        <SectionNav active="resume" />
-
-        <div className="resume-layout">
-          <div className="resume-column skills-column">
-            <ColumnTitle>Technical skills</ColumnTitle>
-            <div className="meter-list">
-              {technicalSkills.map((skill) => <SkillMeter key={skill.name} skill={skill} />)}
-            </div>
-
-            <ColumnTitle>Languages</ColumnTitle>
-            <div className="meter-list compact">
-              {languages.map((skill) => <SkillMeter key={skill.name} skill={skill} />)}
-            </div>
-
-            <ColumnTitle>Personal skills</ColumnTitle>
-            <div className="meter-list compact">
-              {personalSkills.map((skill) => <SkillMeter key={skill.name} skill={skill} />)}
-            </div>
-          </div>
-
-          <div className="resume-column timeline-column">
-            <ColumnTitle>Experience</ColumnTitle>
-            <div className="timeline">
-              {experience.map((item) => (
-                <article className="timeline-entry" key={`${item.period}-${item.project}`}>
-                  <div className="timeline-year">{item.period.split("\n").map((part) => <span key={part}>{part}</span>)}</div>
-                  <div className="timeline-copy">
-                    <h4>{item.title}</h4>
-                    <strong>{item.project}</strong>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <ColumnTitle>Education</ColumnTitle>
-            <div className="education-card">
-              <span className="education-icon"><GraduationCap size={26} /></span>
-              <div>
-                <h4>BCA / Bachelor of Computer Applications</h4>
-                <p>Sree Narayana College of Technology, Kollam</p>
-                <span>Completed April 2026</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="resume-column abilities-column">
-            <ColumnTitle>What can I do?</ColumnTitle>
-            <ul className="bullet-list">
-              {canDo.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-
-            <ColumnTitle>Developer skills</ColumnTitle>
-            <ul className="bullet-list">
-              {developerSkills.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-
-            <ColumnTitle>Hobbies & interests</ColumnTitle>
-            <div className="interest-grid">
-              {interests.map(({ label, icon: Icon }) => (
-                <div className="interest-item" key={label}>
-                  <span><Icon size={22} /></span>
-                  <p>{label}</p>
-                </div>
-              ))}
-            </div>
+      <section className="resume section" id="resume">
+        <div className="section-heading"><span>Resume</span><h2>Skills, experience and education</h2></div>
+        <div className="resume-grid">
+          <article className="panel skills-panel"><h3>Technical skills</h3>{skills.map(([name,label,level]) => <div className="skill-row" key={String(name)}><div><span>{name}</span><small>{label}</small></div><div className="bar"><i style={{width:`${level}%`}}/></div></div>)}</article>
+          <article className="panel timeline-panel"><h3>Experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={String(project)}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
+          <div className="side-stack">
+            <article className="panel"><h3>Education</h3><div className="education"><GraduationCap size={26}/><div><strong>Bachelor of Computer Applications</strong><p>Sree Narayana College of Technology, Kollam</p><span>Completed April 2026</span></div></div></article>
+            <article className="panel"><h3>What I can do</h3><ul>{["Web application development","REST API integration","UI development","Authentication workflows","Database integration","Deployment basics"].map(item=><li key={item}><CheckCircle2 size={15}/>{item}</li>)}</ul></article>
+            <article className="panel"><h3>Hobbies & interests</h3><div className="interests">{[[Code2,"Coding"],[BookOpen,"Reading"],[Camera,"Photography"],[Plane,"Travel"]].map(([Icon,label])=>{const I=Icon as typeof Code2; return <div key={String(label)}><I size={20}/><span>{label as string}</span></div>})}</div></article>
           </div>
         </div>
-        <ExpandMark />
       </section>
 
-      <section className="screen-panel projects-panel" id="portfolio">
-        <SectionNav active="portfolio" />
-        <div className="projects-heading">
-          <p>Selected work</p>
-          <h2>Portfolio</h2>
-          <span>Products built around real problems, practical workflows and clear user experiences.</span>
-        </div>
-
+      <section className="portfolio section" id="portfolio">
+        <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projects.map(({ name, type, description, stack, repository, live, icon: Icon }) => (
-            <article className="project-card" key={name}>
-              <div className="project-icon"><Icon size={28} /></div>
-              <p className="project-type">{type}</p>
-              <h3>{name}</h3>
-              <p className="project-description">{description}</p>
-              <div className="project-stack">
-                {stack.map((item) => <span key={item}>{item}</span>)}
-              </div>
-              <div className="project-actions">
-                <a href={repository} target="_blank" rel="noreferrer">
-                  <Github size={16} /> Repository
-                </a>
-                {live ? (
-                  <a href={live} target="_blank" rel="noreferrer">
-                    <ExternalLink size={16} /> Live project
-                  </a>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="contact-strip" id="contact">
-          <div>
-            <p>Open to junior roles, internships and suitable freelance opportunities.</p>
-            <h2>Let’s build something useful.</h2>
-          </div>
-          <div className="contact-links">
-            <a href="mailto:musammilvilayil@gmail.com"><Mail size={18} /> Email me</a>
-            <a href="tel:+916282135504"><Phone size={18} /> Call me</a>
-          </div>
+          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(s=><span key={s}>{s}</span>)}</div><div className="project-links"><a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a>{live && <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a>}</div></div></article>)}
         </div>
       </section>
+
+      <section className="contact section" id="contact">
+        <div className="contact-copy"><span className="section-label">Let’s connect</span><h2>Let’s build something useful.</h2><p>I’m open to junior developer roles, internships, apprenticeships and suitable freelance opportunities.</p><div className="contact-details"><a href="tel:+916282135504"><Phone size={17}/> +91 62821 35504</a><a href="mailto:musammilvilayil@gmail.com"><Mail size={17}/> musammilvilayil@gmail.com</a><span><MapPin size={17}/> Kollam, Kerala, India</span></div></div>
+        <form className="contact-form" action="mailto:musammilvilayil@gmail.com" method="post" encType="text/plain"><div><input name="name" placeholder="Your name" required/><input name="email" type="email" placeholder="Your email" required/></div><input name="subject" placeholder="Subject"/><textarea name="message" placeholder="Your message" rows={6} required/><button className="btn primary" type="submit">Send message <Send size={16}/></button></form>
+      </section>
+
+      <footer><span>© {new Date().getFullYear()} Muhammad Musammil</span><span>Built with React, TypeScript and Vite.</span></footer>
     </main>
   );
 }
