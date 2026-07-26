@@ -28,6 +28,7 @@ type Project = {
   repo?: string;
   live?: string;
   preview: string;
+  updatedAt: string;
   icon: LucideIcon;
   className: string;
 };
@@ -59,6 +60,7 @@ const projects: Project[] = [
     repo: "https://github.com/musammilvilayil/Megham",
     live: "https://megham-six.vercel.app",
     preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://megham-six.vercel.app",
+    updatedAt: "2026-07-24T10:00:00Z",
     icon: Cloud,
     className: "project-visual megham",
   },
@@ -70,6 +72,7 @@ const projects: Project[] = [
     repo: "https://github.com/musammilvilayil/Projexify",
     live: "https://projexify.onrender.com",
     preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://projexify.onrender.com",
+    updatedAt: "2026-07-24T08:00:00Z",
     icon: Code2,
     className: "project-visual projexify",
   },
@@ -80,6 +83,7 @@ const projects: Project[] = [
     stack: ["JavaScript", "Node.js", "MongoDB", "ESP32"],
     repo: "https://github.com/musammilvilayil/she-sheild",
     preview: "https://opengraph.githubassets.com/1/musammilvilayil/she-sheild",
+    updatedAt: "2026-07-23T08:00:00Z",
     icon: ShieldCheck,
     className: "project-visual shield",
   },
@@ -91,10 +95,15 @@ const projects: Project[] = [
     repo: "https://github.com/musammilvilayil/MISMA",
     live: "https://frontend-sandy-omega-90.vercel.app/",
     preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://frontend-sandy-omega-90.vercel.app/",
+    updatedAt: "2026-07-26T08:07:00Z",
     icon: Code2,
     className: "project-visual misma",
   },
 ];
+
+const projectsByRecentUpdate = [...projects].sort(
+  (first, second) => Date.parse(second.updatedAt) - Date.parse(first.updatedAt),
+);
 
 const socials = [
   [Github, "https://github.com/musammilvilayil", "GitHub"],
@@ -165,7 +174,7 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projects.map(({name,type,description,stack,repo,live,preview,icon:Icon,className}) => (
+          {projectsByRecentUpdate.map(({name,type,description,stack,repo,live,preview,icon:Icon,className}) => (
             <article className="project-card" key={name}>
               <a className={className} href={live ?? repo} target="_blank" rel="noreferrer" aria-label={`Open ${name}`}>
                 <Icon className="project-fallback-icon" size={44}/>
