@@ -27,6 +27,7 @@ type Project = {
   stack: string[];
   repo?: string;
   live?: string;
+  preview: string;
   icon: LucideIcon;
   className: string;
 };
@@ -57,6 +58,7 @@ const projects: Project[] = [
     stack: ["React", "Node.js", "MongoDB", "Cloudinary"],
     repo: "https://github.com/musammilvilayil/Megham",
     live: "https://megham-six.vercel.app",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://megham-six.vercel.app",
     icon: Cloud,
     className: "project-visual megham",
   },
@@ -67,6 +69,7 @@ const projects: Project[] = [
     stack: ["React", "Node.js", "Express", "MongoDB"],
     repo: "https://github.com/musammilvilayil/Projexify",
     live: "https://projexify.onrender.com",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://projexify.onrender.com",
     icon: Code2,
     className: "project-visual projexify",
   },
@@ -76,6 +79,7 @@ const projects: Project[] = [
     description: "Emergency alerts, trusted contacts, location support and connected safety-device concepts.",
     stack: ["JavaScript", "Node.js", "MongoDB", "ESP32"],
     repo: "https://github.com/musammilvilayil/she-sheild",
+    preview: "https://opengraph.githubassets.com/1/musammilvilayil/she-sheild",
     icon: ShieldCheck,
     className: "project-visual shield",
   },
@@ -86,6 +90,7 @@ const projects: Project[] = [
     stack: ["React 19", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary"],
     repo: "https://github.com/musammilvilayil/MISMA",
     live: "https://frontend-sandy-omega-90.vercel.app/",
+    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://frontend-sandy-omega-90.vercel.app/",
     icon: Code2,
     className: "project-visual misma",
   },
@@ -160,7 +165,16 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div></article>)}
+          {projects.map(({name,type,description,stack,repo,live,preview,icon:Icon,className}) => (
+            <article className="project-card" key={name}>
+              <a className={className} href={live ?? repo} target="_blank" rel="noreferrer" aria-label={`Open ${name}`}>
+                <Icon className="project-fallback-icon" size={44}/>
+                <img src={preview} alt={`${name} project preview`} loading="lazy" decoding="async"/>
+                <span className="preview-label"><ExternalLink size={14}/> Open preview</span>
+              </a>
+              <div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div>
+            </article>
+          ))}
         </div>
       </section>
 
