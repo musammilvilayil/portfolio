@@ -25,7 +25,7 @@ type Project = {
   type: string;
   description: string;
   stack: string[];
-  repo: string;
+  repo?: string;
   live?: string;
   icon: LucideIcon;
   className: string;
@@ -66,6 +66,7 @@ const projects: Project[] = [
     description: "A full-stack workflow product for tasks, teams, progress tracking and collaboration.",
     stack: ["React", "Node.js", "Express", "MongoDB"],
     repo: "https://github.com/musammilvilayil/Projexify",
+    live: "https://projexify.onrender.com",
     icon: Code2,
     className: "project-visual projexify",
   },
@@ -77,6 +78,15 @@ const projects: Project[] = [
     repo: "https://github.com/musammilvilayil/she-sheild",
     icon: ShieldCheck,
     className: "project-visual shield",
+  },
+  {
+    name: "MISMA",
+    type: "Web Application",
+    description: "A deployed web application presented as part of my selected frontend work.",
+    stack: ["React", "Frontend", "Responsive UI"],
+    live: "https://frontend-sandy-omega-90.vercel.app/",
+    icon: Code2,
+    className: "project-visual misma",
   },
 ];
 
@@ -149,7 +159,7 @@ function App() {
       <section className="portfolio section" id="portfolio">
         <div className="section-heading"><span>Portfolio</span><h2>Selected product work</h2></div>
         <div className="project-grid">
-          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links"><a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a>{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div></article>)}
+          {projects.map(({name,type,description,stack,repo,live,icon:Icon,className}) => <article className="project-card" key={name}><div className={className}><Icon size={44}/></div><div className="project-body"><small>{type}</small><h3>{name}</h3><p>{description}</p><div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div><div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> Live Demo</a> : null}</div></div></article>)}
         </div>
       </section>
 
