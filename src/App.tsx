@@ -81,9 +81,10 @@ const projects: Project[] = [
   },
   {
     name: "MISMA",
-    type: "Web Application",
-    description: "A deployed web application presented as part of my selected frontend work.",
-    stack: ["React", "Frontend", "Responsive UI"],
+    type: "Baby Wear E-commerce",
+    description: "A full-stack MERN boutique storefront with customer authentication, product browsing, persistent cart, secure checkout, order tracking and admin inventory management.",
+    stack: ["React 19", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary"],
+    repo: "https://github.com/musammilvilayil/MISMA",
     live: "https://frontend-sandy-omega-90.vercel.app/",
     icon: Code2,
     className: "project-visual misma",
