@@ -130,7 +130,7 @@ function App() {
             <div><Phone size={17}/><span>Open to opportunities</span></div>
           </div>
         </div>
-        <div className="about-portrait"><div className="portrait-ring"/><img src="/profile-cutout.svg" alt="Muhammad Musammil wearing a navy suit" width="450" height="600" loading="lazy" decoding="async"/></div>
+        <div className="about-portrait"><div className="portrait-ring"/><img src="/profile.png" alt="Muhammad Musammil wearing a navy suit" width="450" height="600" loading="lazy" decoding="async"/></div>
       </section>
 
       <section className="resume section" id="resume">
