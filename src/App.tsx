@@ -1,272 +1,532 @@
-import type { LucideIcon } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import {
-  BookOpen,
+  ArrowDownRight,
+  ArrowUpRight,
   BrainCircuit,
-  Camera,
-  CheckCircle2,
+  BriefcaseBusiness,
+  Check,
   Cloud,
   Code2,
-  Download,
   ExternalLink,
   Github,
   GraduationCap,
+  Layers3,
   Linkedin,
   Mail,
   MapPin,
-  Phone,
-  Plane,
-  Send,
+  Menu,
   ShieldCheck,
-  ShoppingBag,
+  Sparkles,
+  X,
+  Zap,
 } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 
-type Skill = readonly [name: string, label: string, level: number];
-type Experience = readonly [year: string, end: string, title: string, project: string, description: string];
 type Project = {
   name: string;
+  index: string;
   type: string;
   description: string;
   stack: string[];
   highlights: string[];
   status: string;
-  featured?: boolean;
-  repo?: string;
+  repo: string;
   live?: string;
-  liveLabel?: string;
   preview: string;
-  updatedAt: string;
-  icon: LucideIcon;
-  className: string;
+  icon: typeof Code2;
+  accent: string;
+  featured?: boolean;
 };
-
-const skills: Skill[] = [
-  ["React.js", "Comfortable", 82],
-  ["Next.js", "Working knowledge", 72],
-  ["TypeScript", "Learning", 62],
-  ["Node.js", "Comfortable", 80],
-  ["Express.js", "Comfortable", 78],
-  ["MongoDB", "Comfortable", 82],
-  ["PostgreSQL", "Working knowledge", 66],
-  ["Python / FastAPI", "Working knowledge", 64],
-  ["Tailwind CSS", "Comfortable", 84],
-];
-
-const experience: Experience[] = [
-  ["2025", "Present", "Freelance Full-Stack Developer", "Independent Products", "Built practical web products for students and clients using modern JavaScript, databases, cloud services and deployment platforms."],
-  ["2026", "", "Full-Stack AI & DevOps Developer", "OpsPilot AI", "Built an evidence-backed incident management platform for GitHub Actions with secure webhook ingestion, structured analysis, confidence scoring and approval-based resolution workflows."],
-  ["2026", "", "Full-Stack Developer", "MISMA", "Developed a deployable MERN commerce platform with secure authentication, persistent cart, server-validated checkout, order tracking and protected admin workflows."],
-  ["2026", "", "Product Interface Developer", "MEGHAM", "Designed a responsive cloud workspace with file browsing, upload feedback, activity history, administrative views, settings and accessible mobile navigation."],
-  ["2025", "", "Full-Stack Developer", "Projexify", "Built a learning-project management platform covering enrollment, mentor assignment, project assets, virtual labs and role-based administration."],
-  ["2025", "", "Android & IoT Developer", "SHE-Shield", "Created a safety ecosystem combining an Android application, BLE wearable, emergency communication, GPS tracking and evidence-capture workflows."],
-];
 
 const projects: Project[] = [
   {
     name: "OpsPilot AI",
-    type: "AI-Powered DevOps Incident Management Platform",
-    status: "Live hosted dashboard · Production-oriented MVP",
+    index: "01",
+    type: "AI + DevOps Incident Intelligence",
+    status: "Production-oriented MVP",
     featured: true,
-    description: "OpsPilot receives failed GitHub Actions workflow events, verifies and records each incident, analyses available evidence, and produces a structured root cause, confidence score and developer-approved resolution plan.",
+    description:
+      "An incident-management platform that turns failed GitHub Actions events into structured evidence, root-cause analysis, confidence scoring and approval-based resolution workflows.",
     highlights: [
-      "Verified GitHub workflow_run webhooks with HMAC SHA-256",
-      "Idempotent delivery processing and PostgreSQL incident history",
-      "Evidence-linked failure classification and confidence scoring",
-      "Redis and BullMQ background jobs with a safe synchronous fallback",
-      "Separate Python FastAPI service for structured incident analysis",
-      "Human approval required before any code-changing action",
+      "Verified GitHub workflow webhooks",
+      "Evidence-linked failure analysis",
+      "PostgreSQL incident history",
+      "Redis + BullMQ background jobs",
+      "Python FastAPI analysis service",
+      "Human approval before code-changing actions",
     ],
-    stack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Redis / BullMQ", "Python / FastAPI", "Docker", "GitHub Actions"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Redis", "FastAPI", "Docker"],
     repo: "https://github.com/musammilvilayil/OpsPilot-AI-your-flagship",
     live: "https://opspilot-web-ztwr.onrender.com",
-    liveLabel: "Open OpsPilot",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://opspilot-web-ztwr.onrender.com",
-    updatedAt: "2026-07-26T12:40:43Z",
+    preview: "https://image.thum.io/get/width/1400/crop/820/noanimate/https://opspilot-web-ztwr.onrender.com",
     icon: BrainCircuit,
-    className: "project-visual opspilot",
+    accent: "#82cfff",
   },
   {
-    name: "MISMA",
-    type: "Baby Wear E-commerce Platform",
-    status: "Full-stack MERN product · Deployable storefront",
-    description: "A boutique baby-wear commerce product with customer accounts, product discovery, persistent shopping, secure server-validated checkout and a protected administration experience.",
+    name: "Malhar",
+    index: "02",
+    type: "Cinematic Web Experience",
+    status: "Live frontend experience",
+    featured: true,
+    description:
+      "A story-led institutional website with cinematic visual pacing, responsive horizontal journeys, motion-rich galleries and an editorial presentation built for both desktop and mobile.",
     highlights: [
-      "Customer authentication, product browsing and persistent cart",
-      "Server-validated checkout with database-based price recalculation",
-      "Order tracking with owner-or-admin access control",
-      "Protected inventory management and shop-setting workflows",
-      "Cloudinary uploads with file size and MIME-type restrictions",
-      "Helmet, CORS allow-listing, JSON limits and auth rate limiting",
+      "GSAP-inspired horizontal story sections",
+      "Responsive auto-sliding mobile journeys",
+      "Cinematic overlays and image choreography",
+      "Motion-focused campus gallery",
+      "Performance-conscious responsive behavior",
+      "Live deployment on Vercel",
     ],
-    stack: ["React 19", "React Router", "Tailwind CSS", "Radix UI", "Framer Motion", "Node.js", "Express", "MongoDB", "JWT / bcrypt", "Cloudinary"],
-    repo: "https://github.com/musammilvilayil/MISMA",
-    live: "https://frontend-sandy-omega-90.vercel.app/",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://frontend-sandy-omega-90.vercel.app/",
-    updatedAt: "2026-07-26T08:07:00Z",
-    icon: ShoppingBag,
-    className: "project-visual misma",
+    stack: ["React", "TypeScript", "Vite", "Motion", "Responsive UI", "Vercel"],
+    repo: "https://github.com/musammilvilayil/malhar",
+    live: "https://malhar2.vercel.app",
+    preview: "https://image.thum.io/get/width/1400/crop/820/noanimate/https://malhar2.vercel.app",
+    icon: Sparkles,
+    accent: "#66e8ca",
   },
   {
     name: "MEGHAM",
+    index: "03",
     type: "Cloud Storage Product Workspace",
-    status: "Product interface MVP · Backend integration ready",
-    description: "A polished cloud-storage workspace designed around fast navigation, clear storage insights, realistic file-management journeys and administrative product experiences.",
+    status: "Cloud product MVP",
+    featured: true,
+    description:
+      "A cloud-storage workspace designed around fast file journeys, storage insights, sharing, moderation, activity history and role-aware administration.",
     highlights: [
-      "Spatial dashboard with storage insights, quick access and recent files",
-      "List and grid file browser with search, starred and shared filters",
-      "Upload workflow with progress and success feedback",
-      "Recent, shared, starred and trash management views",
-      "Activity audit trail plus admin member, health and moderation views",
-      "Profile, notification and persistent light/dark appearance settings",
+      "File browser with search and filters",
+      "Upload feedback and storage insights",
+      "Shared, starred and trash workflows",
+      "Activity and audit experiences",
+      "Admin member and moderation views",
+      "Persistent appearance settings",
     ],
-    stack: ["Next.js", "React", "TypeScript", "Vinext", "Node / Express ready", "MongoDB ready", "Cloudinary ready"],
+    stack: ["Next.js", "React", "TypeScript", "Node.js", "MongoDB", "Cloudinary"],
     repo: "https://github.com/musammilvilayil/Megham",
     live: "https://megham-six.vercel.app",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://megham-six.vercel.app",
-    updatedAt: "2026-07-24T10:00:00Z",
+    preview: "https://image.thum.io/get/width/1400/crop/820/noanimate/https://megham-six.vercel.app",
     icon: Cloud,
-    className: "project-visual megham",
+    accent: "#a6d8ff",
   },
   {
     name: "Projexify",
+    index: "04",
     type: "Learning Project Management Platform",
-    status: "Full-stack platform · Collaboration and virtual labs",
-    description: "A full-stack platform for managing learning projects, student enrollments, mentor relationships, project assets and collaborative virtual-lab workflows.",
+    status: "Full-stack collaboration platform",
+    description:
+      "A platform for managing learning projects, student enrollments, mentor relationships, project assets and collaborative virtual-lab workflows.",
     highlights: [
-      "Project catalog with asset uploads and automatic ZIP extraction",
-      "Student enrollment, progress tracking and mentor assignment",
-      "Virtual-lab file manager with downloads and editing workflows",
-      "Real-time collaboration-focused project experience",
-      "Bearer-token API security for protected operations",
-      "Role-based administration and project-centre management",
+      "Project catalog and asset workflows",
+      "Enrollment and progress tracking",
+      "Mentor assignment",
+      "Virtual-lab file management",
+      "Protected REST APIs",
+      "Role-based administration",
     ],
-    stack: ["React", "Node.js", "Express", "MongoDB", "Token Auth", "REST API", "Jest"],
+    stack: ["React", "Node.js", "Express", "MongoDB", "REST API", "Jest"],
     repo: "https://github.com/musammilvilayil/Projexify",
     live: "https://projexify.onrender.com",
-    preview: "https://image.thum.io/get/width/1200/crop/700/noanimate/https://projexify.onrender.com",
-    updatedAt: "2026-07-24T08:00:00Z",
+    preview: "https://image.thum.io/get/width/1400/crop/820/noanimate/https://projexify.onrender.com",
     icon: Code2,
-    className: "project-visual projexify",
+    accent: "#86bfff",
   },
   {
     name: "SHE-Shield",
-    type: "Android and IoT Women’s Safety Ecosystem",
-    status: "Mobile + wearable prototype · Emergency-response system",
-    description: "A multi-trigger safety solution combining an Android application and an ESP32 BLE wearable to send emergency alerts, location information and supporting evidence during high-risk situations.",
+    index: "05",
+    type: "Android + IoT Safety Ecosystem",
+    status: "Mobile + wearable prototype",
+    description:
+      "A multi-trigger safety solution combining an Android app and ESP32 BLE wearable for emergency alerts, location sharing, evidence capture and fallback communication.",
     highlights: [
-      "Manual, shake-detection and BLE-wearable SOS triggers",
-      "High-precision GPS, Google Maps link, multipart SMS and emergency call",
-      "Automatic background audio evidence with local timestamps",
-      "Firebase onboarding and management of up to four trusted contacts",
-      "ESP32 wearable with BLE, AES signals, GPS, GSM fallback and OLED UI",
-      "Evidence gallery, wearable monitor, safe map and configurable fake call",
+      "Manual, shake and wearable SOS",
+      "GPS and emergency calling",
+      "Background evidence capture",
+      "Trusted-contact management",
+      "ESP32 BLE wearable integration",
+      "GSM fallback communication",
     ],
-    stack: ["Android / Java", "Firebase", "Google Maps SDK", "MediaRecorder", "BLE / AES", "ESP32", "MPU6050", "NEO-6M GPS", "SIM800L GSM", "OLED"],
+    stack: ["Android", "Java", "Firebase", "BLE", "ESP32", "GPS", "GSM"],
     repo: "https://github.com/musammilvilayil/she-sheild",
     preview: "https://opengraph.githubassets.com/1/musammilvilayil/she-sheild",
-    updatedAt: "2026-07-23T08:00:00Z",
     icon: ShieldCheck,
-    className: "project-visual shield",
+    accent: "#7ef0d0",
+  },
+  {
+    name: "MISMA",
+    index: "06",
+    type: "MERN Commerce Platform",
+    status: "Deployable full-stack storefront",
+    description:
+      "A boutique baby-wear commerce product with accounts, product discovery, persistent shopping, secure server-validated checkout and protected administration.",
+    highlights: [
+      "Customer auth and persistent cart",
+      "Server-validated checkout",
+      "Owner-or-admin order access",
+      "Inventory management",
+      "Cloudinary upload restrictions",
+      "CORS, rate limiting and security headers",
+    ],
+    stack: ["React", "Tailwind", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary"],
+    repo: "https://github.com/musammilvilayil/MISMA",
+    live: "https://frontend-sandy-omega-90.vercel.app/",
+    preview: "https://image.thum.io/get/width/1400/crop/820/noanimate/https://frontend-sandy-omega-90.vercel.app/",
+    icon: Layers3,
+    accent: "#b9d8ff",
   },
 ];
 
-const projectsByRecentUpdate = [...projects].sort(
-  (first, second) => Date.parse(second.updatedAt) - Date.parse(first.updatedAt),
-);
+const skillGroups = [
+  {
+    label: "Core",
+    items: ["React", "JavaScript", "Node.js", "Express", "MongoDB", "REST APIs"],
+  },
+  {
+    label: "Working with",
+    items: ["Next.js", "TypeScript", "PostgreSQL", "FastAPI", "Docker", "GitHub Actions"],
+  },
+  {
+    label: "Growing into",
+    items: ["Cloud", "DevOps", "Cybersecurity", "AI Systems", "Redis", "System Design"],
+  },
+];
+
+const journey = [
+  {
+    year: "2025 — Present",
+    title: "Freelance Full-Stack Developer",
+    body: "Building practical web and application products for student and client use-cases while strengthening product thinking, delivery and communication.",
+  },
+  {
+    year: "2026",
+    title: "AI + DevOps Systems",
+    body: "Expanded into incident intelligence, secure webhooks, background jobs, evidence-backed AI analysis and approval-led automation through OpsPilot AI.",
+  },
+  {
+    year: "2026",
+    title: "BCA Graduate",
+    body: "Completed Bachelor of Computer Applications at Sree Narayana College of Technology, Kollam, and focused on full-stack engineering opportunities.",
+  },
+];
 
 const socials = [
-  [Github, "https://github.com/musammilvilayil", "GitHub"],
-  [Linkedin, "https://www.linkedin.com/in/muhammad-musammil-a-646882280/", "LinkedIn"],
-  [Mail, "mailto:musammilvilayil@gmail.com", "Email"],
-] as const;
+  { label: "GitHub", href: "https://github.com/musammilvilayil", icon: Github },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/muhammad-musammil-a-646882280/", icon: Linkedin },
+  { label: "Email", href: "mailto:musammilvilayil@gmail.com", icon: Mail },
+];
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 function Header() {
+  const [open, setOpen] = useState(false);
+  const nav = [
+    ["Work", "#work"],
+    ["Expertise", "#expertise"],
+    ["Journey", "#journey"],
+    ["About", "#about"],
+  ];
+
   return (
-    <header className="topbar">
-      <a className="brand" href="#home">MM</a>
-      <nav>
-        <a href="#home">Home</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a>
+    <header className="site-header">
+      <a className="brand-mark" href="#top" aria-label="Muhammad Musammil home">
+        <span>MM</span>
+      </a>
+      <nav className="desktop-nav" aria-label="Primary navigation">
+        {nav.map(([label, href]) => (
+          <a key={href} href={href}>{label}</a>
+        ))}
       </nav>
-      <a className="phone-pill" href="tel:+916282135504"><Phone size={14}/> +91 62821 35504</a>
+      <a className="header-cta" href="mailto:musammilvilayil@gmail.com">
+        <span className="availability-dot" /> Available for opportunities
+      </a>
+      <button className="menu-button" onClick={() => setOpen((value) => !value)} aria-label="Toggle navigation" aria-expanded={open}>
+        {open ? <X size={20} /> : <Menu size={20} />}
+      </button>
+      {open && (
+        <motion.div className="mobile-nav" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
+          {nav.map(([label, href]) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+          ))}
+          <a href="mailto:musammilvilayil@gmail.com" onClick={() => setOpen(false)}>Contact</a>
+        </motion.div>
+      )}
     </header>
   );
 }
 
+function Hero() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section className="hero" id="top">
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="aurora aurora-one" aria-hidden="true" />
+      <div className="aurora aurora-two" aria-hidden="true" />
+      <div className="cursor-glow" aria-hidden="true" />
+
+      <div className="hero-shell">
+        <motion.div
+          className="hero-copy"
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="eyebrow"><Zap size={14} /> Full-Stack Developer · AI · Cloud</div>
+          <h1>
+            I build products that go
+            <span className="gradient-word"> beyond the interface.</span>
+          </h1>
+          <p className="hero-lede">
+            Muhammad Musammil — a product-minded developer from Kerala building useful, secure and visually refined digital systems across web, AI workflows, cloud products and connected technology.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary magnetic" href="#work">
+              Explore selected work <ArrowDownRight size={17} />
+            </a>
+            <a className="button button-ghost" href="mailto:musammilvilayil@gmail.com">
+              Start a conversation <ArrowUpRight size={17} />
+            </a>
+          </div>
+          <div className="hero-socials">
+            {socials.map(({ label, href, icon: Icon }) => (
+              <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                <Icon size={16} /> {label}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="hero-visual"
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.94, rotateY: -8 }}
+          animate={reduceMotion ? undefined : { opacity: 1, scale: 1, rotateY: 0 }}
+          transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="orb-stage" aria-hidden="true">
+            <div className="orb-core" />
+            <div className="orb-ring orb-ring-a" />
+            <div className="orb-ring orb-ring-b" />
+            <div className="orb-ring orb-ring-c" />
+          </div>
+          <div className="system-card system-card-top">
+            <span>FOCUS / 2026</span>
+            <strong>Full-stack systems</strong>
+            <small>Interfaces · APIs · AI · Cloud</small>
+          </div>
+          <div className="system-card system-card-bottom">
+            <span>BUILD STATUS</span>
+            <strong><i /> Open to opportunities</strong>
+            <small>Kollam, Kerala, India</small>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="hero-marquee" aria-label="Capabilities">
+        <div>
+          <span>PRODUCT ENGINEERING</span><b>✦</b><span>FULL-STACK</span><b>✦</b><span>AI WORKFLOWS</span><b>✦</b><span>CLOUD</span><b>✦</b><span>DEVOPS</span><b>✦</b><span>RESPONSIVE UI</span><b>✦</b>
+          <span>PRODUCT ENGINEERING</span><b>✦</b><span>FULL-STACK</span><b>✦</b><span>AI WORKFLOWS</span><b>✦</b><span>CLOUD</span><b>✦</b><span>DEVOPS</span><b>✦</b><span>RESPONSIVE UI</span><b>✦</b>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ project, order }: { project: Project; order: number }) {
+  const [previewFailed, setPreviewFailed] = useState(false);
+  const Icon = project.icon;
+
+  return (
+    <Reveal className={`project-card${project.featured ? " project-featured" : ""}`} delay={Math.min(order * 0.04, 0.16)}>
+      <div className="project-index">{project.index}</div>
+      <div className="project-copy">
+        <div className="project-meta">
+          <span>{project.type}</span>
+          <span className="project-status"><i /> {project.status}</span>
+        </div>
+        <h3>{project.name}</h3>
+        <p>{project.description}</p>
+        <div className="project-highlights">
+          {project.highlights.slice(0, project.featured ? 6 : 4).map((highlight) => (
+            <span key={highlight}><Check size={13} /> {highlight}</span>
+          ))}
+        </div>
+        <div className="project-stack">
+          {project.stack.map((item) => <span key={item}>{item}</span>)}
+        </div>
+        <div className="project-actions">
+          {project.live && (
+            <a href={project.live} target="_blank" rel="noreferrer">Live project <ExternalLink size={14} /></a>
+          )}
+          <a href={project.repo} target="_blank" rel="noreferrer">Repository <Github size={14} /></a>
+        </div>
+      </div>
+      <a className="project-preview" href={project.live ?? project.repo} target="_blank" rel="noreferrer" style={{ "--project-accent": project.accent } as React.CSSProperties}>
+        {!previewFailed ? (
+          <img src={project.preview} alt={`${project.name} project preview`} loading="lazy" decoding="async" onError={() => setPreviewFailed(true)} />
+        ) : (
+          <div className="preview-fallback"><Icon size={52} /><span>{project.name}</span></div>
+        )}
+        <span className="preview-shine" />
+        <span className="preview-open">Open <ArrowUpRight size={15} /></span>
+      </a>
+    </Reveal>
+  );
+}
+
 function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.25 });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updatePointer = (event: PointerEvent) => {
+      root.style.setProperty("--mouse-x", `${event.clientX}px`);
+      root.style.setProperty("--mouse-y", `${event.clientY}px`);
+    };
+    window.addEventListener("pointermove", updatePointer, { passive: true });
+    return () => window.removeEventListener("pointermove", updatePointer);
+  }, []);
+
+  const featured = useMemo(() => projects.filter((project) => project.featured), []);
+  const more = useMemo(() => projects.filter((project) => !project.featured), []);
+
   return (
     <main>
+      <motion.div className="scroll-progress" style={{ scaleX }} />
       <Header />
-      <section className="hero" id="home">
-        <div className="hero-copy">
-          <span className="kicker">Junior Full-Stack Developer</span>
-          <h1><span>Muhammad</span>Musammil</h1>
-          <p>BCA graduate building reliable web products across full-stack development, AI-assisted systems, cloud workflows and connected safety technology.</p>
-          <div className="hero-actions">
-            <a className="btn primary" href="#resume"><Download size={17}/> View Resume</a>
-            <a className="btn" href="#portfolio">View Products <ExternalLink size={16}/></a>
+      <Hero />
+
+      <section className="section work-section" id="work">
+        <Reveal className="section-heading split-heading">
+          <div>
+            <span className="section-kicker">Selected work</span>
+            <h2>Products with a reason to exist.</h2>
           </div>
-          <div className="socials">
-            {socials.map(([Icon, href, label]) => <a key={label} href={href} aria-label={label} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"><Icon size={19}/></a>)}
-          </div>
+          <p>
+            Less “template portfolio”, more evidence of how I think: product intent, architecture, workflows, security, UI and deployment — all in one place.
+          </p>
+        </Reveal>
+
+        <div className="featured-work">
+          {featured.map((project, index) => <ProjectCard key={project.name} project={project} order={index} />)}
+        </div>
+
+        <Reveal className="more-work-heading">
+          <span>More product work</span>
+          <div />
+        </Reveal>
+        <div className="more-work-grid">
+          {more.map((project, index) => <ProjectCard key={project.name} project={project} order={index} />)}
         </div>
       </section>
 
-      <section className="about section" id="about">
-        <div className="about-copy">
-          <span className="section-label">About me</span>
-          <h2>BCA Graduate<br/>Full-Stack <em>Developer</em></h2>
-          <p>I’m Muhammad Musammil, a BCA graduate from Kerala. I build modern web products using React, Next.js, Node.js and databases, while developing practical experience with AI services, secure APIs, background jobs, deployments and IoT-connected applications.</p>
-          <div className="traits">{["Clean code", "Problem solver", "Fast learner", "Team player"].map(item => <div key={item}><CheckCircle2 size={17}/><span>{item}</span></div>)}</div>
-          <div className="about-info">
-            <div><MapPin size={17}/><span>Kollam, Kerala, India</span></div>
-            <div><Mail size={17}/><span>musammilvilayil@gmail.com</span></div>
-            <div><GraduationCap size={17}/><span>BCA, completed April 2026</span></div>
-            <div><Phone size={17}/><span>Open to opportunities</span></div>
-          </div>
-        </div>
-        <div className="about-portrait"><div className="portrait-ring"/><img src="/profile.png" alt="Muhammad Musammil wearing a navy suit" width="450" height="600" loading="lazy" decoding="async"/></div>
-      </section>
-
-      <section className="resume section" id="resume">
-        <div className="section-heading"><span>Resume</span><h2>Skills, experience and education</h2></div>
-        <div className="resume-grid">
-          <article className="panel skills-panel"><h3>Technical skills</h3>{skills.map(([name,label,level]) => <div className="skill-row" key={name}><div><span>{name}</span><small>{label}</small></div><div className="bar"><i style={{width:`${level}%`}}/></div></div>)}</article>
-          <article className="panel timeline-panel"><h3>Product experience</h3><div className="timeline">{experience.map(([year,end,title,project,description]) => <div className="timeline-item" key={project}><div className="year"><b>{year}</b>{end && <span>{end}</span>}</div><div><h4>{title}</h4><strong>{project}</strong><p>{description}</p></div></div>)}</div></article>
-          <div className="side-stack">
-            <article className="panel"><h3>Education</h3><div className="education"><GraduationCap size={26}/><div><strong>Bachelor of Computer Applications</strong><p>Sree Narayana College of Technology, Kollam</p><span>Completed April 2026</span></div></div></article>
-            <article className="panel"><h3>What I can do</h3><ul>{["Full-stack web product development","REST API and webhook integration","Authentication and role-based access","SQL and NoSQL database integration","AI service and background-job workflows","Cloud deployment and Docker basics","Responsive UI development","IoT-connected application concepts"].map(item=><li key={item}><CheckCircle2 size={15}/>{item}</li>)}</ul></article>
-            <article className="panel"><h3>Hobbies & interests</h3><div className="interests">{[[Code2,"Coding"],[BookOpen,"Reading"],[Camera,"Photography"],[Plane,"Travel"]].map(([Icon,label])=>{const I=Icon as LucideIcon; return <div key={String(label)}><I size={20}/><span>{String(label)}</span></div>})}</div></article>
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio section" id="portfolio">
-        <div className="section-heading"><span>Products & projects</span><h2>Detailed product work</h2><p className="section-intro">Each product includes its purpose, major workflows, technical architecture and verified repository or live-demo access.</p></div>
-        <div className="project-grid">
-          {projectsByRecentUpdate.map(({name,type,description,stack,highlights,status,featured,repo,live,liveLabel,preview,icon:Icon,className}) => (
-            <article className={`project-card${featured ? " featured-project" : ""}`} key={name}>
-              <a className={className} href={live ?? repo} target="_blank" rel="noreferrer" aria-label={`Open ${name}`}>
-                <Icon className="project-fallback-icon" size={44}/>
-                <img src={preview} alt={`${name} project preview`} loading="lazy" decoding="async"/>
-                <span className="preview-label"><ExternalLink size={14}/> {liveLabel ?? "Open project"}</span>
-              </a>
-              <div className="project-body">
-                <span className="project-status">{status}</span>
-                <small>{type}</small><h3>{name}</h3><p>{description}</p>
-                <ul className="project-highlights">{highlights.map(item => <li key={item}><CheckCircle2 size={14}/><span>{item}</span></li>)}</ul>
-                <div className="chips">{stack.map(item=><span key={item}>{item}</span>)}</div>
-                <div className="project-links">{repo ? <a href={repo} target="_blank" rel="noreferrer"><Github size={16}/> GitHub</a> : null}{live ? <a href={live} target="_blank" rel="noreferrer"><ExternalLink size={16}/> {liveLabel ?? "Live Demo"}</a> : null}</div>
+      <section className="section expertise-section" id="expertise">
+        <Reveal className="section-heading compact-heading">
+          <span className="section-kicker">Expertise</span>
+          <h2>A practical stack, grouped by how I use it.</h2>
+        </Reveal>
+        <div className="expertise-grid">
+          {skillGroups.map((group, index) => (
+            <Reveal key={group.label} className="skill-panel" delay={index * 0.07}>
+              <span className="skill-number">0{index + 1}</span>
+              <h3>{group.label}</h3>
+              <div className="skill-chips">
+                {group.items.map((skill) => <span key={skill}>{skill}</span>)}
               </div>
-            </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="capability-strip">
+          <div><Code2 size={18} /><span>Frontend systems</span></div>
+          <div><Layers3 size={18} /><span>Backend + APIs</span></div>
+          <div><BrainCircuit size={18} /><span>AI workflows</span></div>
+          <div><Cloud size={18} /><span>Cloud + deployment</span></div>
+          <div><ShieldCheck size={18} /><span>Security-minded builds</span></div>
+        </Reveal>
+      </section>
+
+      <section className="section journey-section" id="journey">
+        <Reveal className="section-heading split-heading">
+          <div>
+            <span className="section-kicker">Journey</span>
+            <h2>Learning by shipping.</h2>
+          </div>
+          <p>
+            My strongest growth has come from turning ideas into usable products, then improving the architecture, UX, security and delivery around them.
+          </p>
+        </Reveal>
+
+        <div className="journey-list">
+          {journey.map((item, index) => (
+            <Reveal key={item.title} className="journey-row" delay={index * 0.06}>
+              <span className="journey-index">0{index + 1}</span>
+              <span className="journey-year">{item.year}</span>
+              <div><h3>{item.title}</h3><p>{item.body}</p></div>
+              <ArrowUpRight size={20} />
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="contact section" id="contact">
-        <div className="contact-copy"><span className="section-label">Let’s connect</span><h2>Let’s build something useful.</h2><p>I’m open to junior developer roles, internships, apprenticeships and suitable freelance opportunities.</p><div className="contact-details"><a href="tel:+916282135504"><Phone size={17}/> +91 62821 35504</a><a href="mailto:musammilvilayil@gmail.com"><Mail size={17}/> musammilvilayil@gmail.com</a><span><MapPin size={17}/> Kollam, Kerala, India</span></div></div>
-        <form className="contact-form" action="mailto:musammilvilayil@gmail.com" method="post" encType="text/plain"><div><input name="name" placeholder="Your name" required/><input name="email" type="email" placeholder="Your email" required/></div><input name="subject" placeholder="Subject"/><textarea name="message" placeholder="Your message" rows={6} required/><button className="btn primary" type="submit">Send message <Send size={16}/></button></form>
+      <section className="section about-section" id="about">
+        <Reveal className="about-visual">
+          <div className="portrait-shell">
+            <img src="/profile.webp" alt="Muhammad Musammil" width="520" height="680" loading="lazy" decoding="async" />
+            <div className="portrait-glow" />
+            <div className="portrait-badge"><Sparkles size={15} /> Building what’s next</div>
+          </div>
+        </Reveal>
+
+        <Reveal className="about-copy" delay={0.08}>
+          <span className="section-kicker">About</span>
+          <h2>Developer mindset. Product curiosity. Continuous growth.</h2>
+          <p>
+            I’m Muhammad Musammil, a BCA graduate from Kollam, Kerala. I enjoy taking an idea from a rough requirement to a working product — shaping the interface, APIs, data model, deployment and the small details that make the experience feel intentional.
+          </p>
+          <p>
+            My current direction is full-stack engineering with deeper focus on AI-assisted systems, cloud and DevOps, while continuing to strengthen security fundamentals.
+          </p>
+          <div className="about-facts">
+            <div><MapPin size={17} /><span>Kollam, Kerala, India</span></div>
+            <div><GraduationCap size={17} /><span>BCA · Completed April 2026</span></div>
+            <div><BriefcaseBusiness size={17} /><span>Open to junior developer opportunities</span></div>
+          </div>
+        </Reveal>
       </section>
 
-      <footer><span>© {new Date().getFullYear()} Muhammad Musammil</span><span>Built with React, TypeScript and Vite.</span></footer>
+      <section className="section contact-section" id="contact">
+        <Reveal className="contact-card">
+          <div>
+            <span className="section-kicker">Let’s build something useful</span>
+            <h2>Have a role, product or idea in mind?</h2>
+            <p>I’m open to full-stack roles, junior software opportunities, product collaborations and meaningful freelance work.</p>
+          </div>
+          <div className="contact-actions">
+            <a className="button button-primary" href="mailto:musammilvilayil@gmail.com">Email me <Mail size={16} /></a>
+            <a className="button button-ghost" href="https://github.com/musammilvilayil" target="_blank" rel="noreferrer">View GitHub <Github size={16} /></a>
+          </div>
+        </Reveal>
+      </section>
+
+      <footer>
+        <span>© 2026 Muhammad Musammil</span>
+        <span>Built with intent, motion and a little glow.</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </main>
   );
 }
